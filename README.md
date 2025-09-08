@@ -42,3 +42,35 @@ Manages deployment pipelines, server configuration, and cloud infrastructure. Au
 ### UX/UI Designer
 Designs the application’s look and feel. Creates wireframes, prototypes, and high-fidelity designs to ensure a user-friendly interface that meets both aesthetic and functional requirements.
   
+## Technology Stack
+
+### Django
+A high-level Python web framework that simplifies building robust and scalable web applications.  
+In this project, Django will be used to develop the backend logic, handle HTTP requests, manage authentication, and connect with the database.
+
+### PostgreSQL
+An advanced open-source relational database system.  
+It will store user data, booking information, property details, and all persistent data for the AirBnB clone.
+
+### GraphQL
+A query language for APIs and runtime for executing those queries.  
+It allows clients to request exactly the data they need, improving efficiency compared to REST.  
+In this project, GraphQL will make data retrieval between frontend and backend more flexible and efficient.
+
+### HTML, CSS, and JavaScript
+The core frontend technologies.  
+- **HTML** structures the web pages.  
+- **CSS** styles and ensures responsiveness.  
+- **JavaScript** adds interactivity and dynamic behavior for a smooth user experience.
+
+### Bootstrap (optional if included in overview)
+A frontend toolkit for building responsive and mobile-first web pages.  
+It helps speed up UI development with pre-designed components.
+
+### Docker (if part of overview)
+A containerization tool that ensures the application runs consistently across different environments.  
+It simplifies deployment and environment management.
+
+### Git & GitHub
+- **Git**: Version control system to track changes in the codebase.  
+- **GitHub**: Hosting platform for collaboration, pull requests, and project management.
