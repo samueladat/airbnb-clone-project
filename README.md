@@ -177,3 +177,64 @@ Provides powerful search options with filters such as location, price range, pro
 
 ### 7. Admin Dashboard (optional/advanced)
 Provides administrators with tools to manage users, properties, and bookings. Ensures smooth operation of the platform by monitoring system activity.
+
+## API Security
+
+Securing the backend API is critical for protecting user data, ensuring trustworthy payments, and maintaining platform integrity. Below are the key measures we will implement and why they matter for this project.
+
+### 1) Authentication (Who are you?)
+- **Approach:** Token-based auth (e.g., JWT) or session-based; password hashing with Argon2/bcrypt; optional OAuth2 for social login.
+- **Why it matters:** Prevents unauthorized access to user accounts, protects personal information, and ensures only verified users can create bookings or manage listings.
+
+### 2) Authorization (What are you allowed to do?)
+- **Approach:** Role- and resource-based access control (RBAC): admin, host, guest; enforce ownership checks (e.g., a host may only edit their own property).
+- **Why it matters:** Protects critical actions and data. A user should not be able to modify another user’s booking or a property they don’t own.
+
+### 3) Transport Security (HTTPS/TLS)
+- **Approach:** Enforce HTTPS everywhere (redirect HTTP → HTTPS), HSTS headers in production.
+- **Why it matters:** Encrypts data in transit (logins, payment tokens, personal info), preventing credential theft and man-in-the-middle attacks.
+
+### 4) Input Validation & Sanitization
+- **Approach:** Validate request bodies, query strings, and headers; server-side schema validation (e.g., pydantic/DRF serializers); sanitize strings to prevent XSS/SQLi.
+- **Why it matters:** Blocks injection attacks (SQLi, XSS) and malformed requests that could crash the API or leak data.
+
+### 5) Rate Limiting & Abuse Protection
+- **Approach:** Global and per-route rate limits (e.g., `/auth/login` stricter), bot detection, IP throttling, and account lockout for brute-force attempts.
+- **Why it matters:** Prevents credential stuffing, brute-force login attempts, and denial-of-service from abusive clients.
+
+### 6) CORS & CSRF Protections
+- **Approach:** Restrictive CORS (allow-list known origins), SameSite cookies (if session-based), CSRF tokens for state-changing requests from browsers.
+- **Why it matters:** Stops cross-origin attacks and protects authenticated browser sessions from unwanted actions.
+
+### 7) Secrets & Config Management
+- **Approach:** Store secrets (DB creds, API keys, JWT secrets) in environment variables or a secret manager (never in Git); rotate keys; principle of least privilege in cloud/DB.
+- **Why it matters:** Leaked secrets compromise the entire system—DB dumps, token forgery, payment fraud.
+
+### 8) Data Protection (At Rest & Minimization)
+- **Approach:** Encrypt sensitive fields at rest where appropriate, store only what we need (minimization), strict retention policies, GDPR-friendly practices.
+- **Why it matters:** Limits blast radius if a breach occurs and respects users’ privacy.
+
+### 9) Secure Payments
+- **Approach:** Use a PCI-compliant provider; never store raw card data; verify webhook signatures; idempotent payment endpoints.
+- **Why it matters:** Reduces legal exposure and protects users’ financial data.
+
+### 10) Logging, Monitoring & Auditing
+- **Approach:** Centralized structured logs (no PII), audit trails for critical actions (login, booking, payment, property changes), anomaly alerts.
+- **Why it matters:** Enables incident response, fraud detection, and compliance evidence.
+
+### 11) Dependency & Platform Hardening
+- **Approach:** Pin and scan dependencies (SCA), regular security updates, container image scanning, minimal base images, security headers (CSP, X-Frame-Options, X-Content-Type-Options).
+- **Why it matters:** Third-party packages and defaults are common attack vectors; hardening reduces risk.
+
+### 12) Error Handling & Safe Defaults
+- **Approach:** Standardized error responses without stack traces; safe timeouts; deny-by-default access; robust 4xx/5xx handling.
+- **Why it matters:** Prevents information leakage and avoids undefined behavior.
+
+---
+
+### Security Focus by Area
+
+- **User Accounts:** Strong auth, password hashing, brute-force protection, secure sessions/JWTs → prevents account takeover.
+- **Properties & Reviews:** Authorization and ownership checks → prevents unauthorized edits and data tampering.
+- **Bookings:** Validation of dates and status transitions, idempotent operations → prevents logic abuse and double bookings.
+- **Payments:** Provider-based flows, signed webhooks, no raw card storage → protects financial data and prevents charge manipulation.
