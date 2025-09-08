@@ -74,3 +74,84 @@ It simplifies deployment and environment management.
 ### Git & GitHub
 - **Git**: Version control system to track changes in the codebase.  
 - **GitHub**: Hosting platform for collaboration, pull requests, and project management.
+
+## Database Design
+
+### Key Entities & Fields
+
+#### 1) Users
+- **id** (PK)
+- **name**
+- **email** (unique)
+- **password_hash**
+- **role** (guest | host | admin)
+- **created_at**
+
+#### 2) Properties
+- **id** (PK)
+- **host_id** (FK → Users.id)
+- **title**
+- **description**
+- **address**
+- **city**, **country**
+- **price_per_night**
+- **created_at**
+
+#### 3) Bookings
+- **id** (PK)
+- **property_id** (FK → Properties.id)
+- **guest_id** (FK → Users.id)
+- **check_in_date**
+- **check_out_date**
+- **total_price**
+- **status** (pending | confirmed | canceled)
+- **created_at**
+
+#### 4) Reviews
+- **id** (PK)
+- **property_id** (FK → Properties.id)
+- **author_id** (FK → Users.id)
+- **rating** (1–5)
+- **comment**
+- **created_at**
+
+#### 5) Payments
+- **id** (PK)
+- **booking_id** (FK → Bookings.id)
+- **amount**
+- **currency**
+- **status** (initiated | succeeded | failed | refunded)
+- **provider_ref** (transaction/reference id)
+- **created_at**
+
+> *(PK = Primary Key, FK = Foreign Key)*
+
+### Relationships
+
+- **User (host)** 1 — *N* **Properties**  
+  A host can list many properties; each property belongs to one host.
+
+- **User (guest)** 1 — *N* **Bookings**  
+  A guest can make many bookings; each booking is made by one guest.
+
+- **Property** 1 — *N* **Bookings**  
+  A property can have many bookings; each booking belongs to one property.
+
+- **Property** 1 — *N* **Reviews**  
+  A property can have many reviews; each review is authored by one user.
+
+- **User** 1 — *N* **Reviews**  
+  A user can write many reviews.
+
+- **Booking** 1 — 1 **Payment** *(typical case)*  
+  Each booking has one payment record (or one latest active payment).
+
+### Quick ER Diagram (text)
+
+Users (id) ──< Properties (host_id)  
+Users (id) ──< Bookings (guest_id)  
+Properties (id) ──< Bookings (property_id)  
+Properties (id) ──< Reviews (property_id)  
+Users (id) ──< Reviews (author_id)  
+Bookings (id) ──  Payments (booking_id)
+
