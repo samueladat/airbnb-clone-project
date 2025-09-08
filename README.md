@@ -238,3 +238,24 @@ Securing the backend API is critical for protecting user data, ensuring trustwor
 - **Properties & Reviews:** Authorization and ownership checks → prevents unauthorized edits and data tampering.
 - **Bookings:** Validation of dates and status transitions, idempotent operations → prevents logic abuse and double bookings.
 - **Payments:** Provider-based flows, signed webhooks, no raw card storage → protects financial data and prevents charge manipulation.
+
+## CI/CD Pipeline
+
+Continuous Integration (CI) and Continuous Deployment/Delivery (CD) are key practices in modern software development.  
+
+- **Continuous Integration (CI):** Automatically builds, tests, and validates code every time a change is pushed to the repository. This ensures that issues are caught early and the codebase remains stable.  
+- **Continuous Deployment/Delivery (CD):** Automatically deploys tested changes to staging or production environments. This reduces manual work, speeds up release cycles, and makes deployments more reliable.
+
+### Why CI/CD is Important for this Project
+- **Reliability:** Ensures that new features and bug fixes don’t break existing functionality.  
+- **Speed:** Automates repetitive tasks, reducing development bottlenecks.  
+- **Quality:** Enforces testing, code linting, and security checks before changes are merged.  
+- **Collaboration:** Makes it easier for multiple developers to contribute safely.  
+
+### Tools We Could Use
+- **GitHub Actions:** For automating workflows directly within GitHub (tests, builds, deployments).  
+- **Docker:** For containerizing the application, ensuring consistency across development, testing, and production environments.  
+- **Heroku / AWS / Azure:** For hosting and deployment.  
+- **PostgreSQL migrations (via Django):** Ensuring database changes are applied consistently across environments.  
+
+The CI/CD pipeline will help us move faster while maintaining high quality and security for the AirBnB Clone project.
