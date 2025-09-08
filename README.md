@@ -155,3 +155,25 @@ Properties (id) ──< Reviews (property_id)
 Users (id) ──< Reviews (author_id)  
 Bookings (id) ──  Payments (booking_id)
 
+## Feature Breakdown
+
+### 1. User Management
+Handles user registration, login, and authentication. Users can sign up as guests or hosts, manage their profiles, and securely log in and out of the system.
+
+### 2. Property Management
+Allows hosts to list properties with details such as title, description, address, pricing, and availability. Hosts can also edit or remove their listings at any time.
+
+### 3. Booking System
+Enables guests to search for properties, check availability, and make reservations. This system ensures that booking dates are validated and prevents double bookings.
+
+### 4. Review System
+Guests can leave reviews and ratings for properties they have stayed in. This builds trust between users and provides feedback for hosts to improve their services.
+
+### 5. Payment Integration
+Processes secure payments for bookings, including tracking payment status. Ensures that guests can pay safely and hosts receive their funds efficiently.
+
+### 6. Search and Filtering
+Provides powerful search options with filters such as location, price range, property type, and amenities. Helps users quickly find the most suitable property.
+
+### 7. Admin Dashboard (optional/advanced)
+Provides administrators with tools to manage users, properties, and bookings. Ensures smooth operation of the platform by monitoring system activity.
